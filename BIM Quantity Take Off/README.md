@@ -89,40 +89,6 @@ python main.py building_model.ifc boq_priced.xlsx --cost
 python main.py building_model.ifc boq_priced.xlsx --cost --rates my_rates.json
 ```
 
-### Programmatic Usage
-
-```python
-from src.ifc_reader import IFCReader
-from src.quantity_extractor import QuantityExtractor
-from src.boq_generator import BOQGenerator
-from src.excel_exporter import ExcelExporter
-
-# Read IFC file
-reader = IFCReader('model.ifc')
-ifc_file = reader.get_file()
-project_info = reader.get_project_info()
-
-# Extract civil engineering elements
-elements = reader.get_civil_engineering_elements()
-
-# Extract quantities
-unit_scale_factor = project_info.get('unit_scale_factor', 0.001)
-extractor = QuantityExtractor(ifc_file, unit_scale_factor=unit_scale_factor)
-quantities = extractor.extract_all_quantities(
-    elements,
-    get_storey_fn=reader.get_element_storey
-)
-
-# Generate BOQ
-boq_gen = BOQGenerator()
-boq_gen.load_quantities(quantities)
-boq_df = boq_gen.generate_boq(grouping_level='type')
-summary = boq_gen.get_summary(boq_df)
-
-# Export to Excel
-exporter = ExcelExporter('output.xlsx')
-exporter.export_boq(boq_df, summary=summary, project_info=project_info)
-```
 
 ## Output Format
 
@@ -217,18 +183,6 @@ BIM/
 └── IFC_ISSUES_NOTES.md         # Common IFC issues and solutions
 ```
 
-## Configuration
-
-Configuration can be customized through:
-
-1. **Environment Variables**: Create a `.env` file:
-```env
-BIM_QTO_GROUPING=type
-BIM_QTO_LOG_LEVEL=INFO
-```
-
-2. **Config Module**: Edit `config.py` for advanced settings
-
 ## Troubleshooting
 
 ### Common Issues
@@ -282,32 +236,6 @@ To ensure best results with this tool, when exporting IFC files from Revit:
    - Export only required element types
    - Reduces file size and processing time
 
-## Development
-
-### Code Quality
-
-The code follows Python best practices:
-- Type hints where applicable
-- Comprehensive docstrings
-- Modular architecture with clear separation of concerns
-- Error handling and logging throughout
-- PEP 8 style guide compliance
-
-### Testing
-
-Test the tool with sample IFC files:
-1. Export a test model from Revit
-2. Run the tool: `python main.py test_model.ifc test_output.xlsx`
-3. Verify quantities in the Excel output
-4. Compare with manual calculations if needed
-
-### Extending the Tool
-
-To add support for additional element types:
-1. Add element type to `get_civil_engineering_elements()` in `ifc_reader.py`
-2. Update quantity extraction logic if needed
-3. Test with sample IFC files containing the new element type
-
 ## Documentation
 
 - **[IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)**: Detailed implementation plan and architecture
@@ -315,7 +243,7 @@ To add support for additional element types:
 
 ## License
 
-This tool is provided as-is for educational and professional use.
+This tool is provided as-is for educational use.
 
 ## Version History
 
@@ -339,9 +267,4 @@ Built with:
 
 **Note**: This tool is designed for production use in civil engineering and construction projects. Ensure proper validation of quantities before use in cost estimation or project documentation.
 
-**For Portfolio/CV Use**: This project demonstrates:
-- BIM software development skills
-- IFC file processing expertise
-- Python programming best practices
-- Production-quality code architecture
-- Civil engineering domain knowledge
+
