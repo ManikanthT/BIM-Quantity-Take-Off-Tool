@@ -1,0 +1,11 @@
+# Core BIM and Data Processing Libraries
+ifcopenshell>=0.7.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Utilities
+python-dotenv>=1.0.0
+typing-extensions>=4.5.0
+
+# Optional: For enhanced Excel formatting
+xlsxwriter>=3.1.0

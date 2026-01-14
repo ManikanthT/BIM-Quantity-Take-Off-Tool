@@ -1,0 +1,38 @@
+{
+    "IfcBeam": {
+        "default": 350.0,
+        "Concrete": 400.0,
+        "Steel": 2500.0,
+        "Wood": 800.0
+    },
+    "IfcColumn": {
+        "default": 400.0,
+        "Concrete": 450.0,
+        "Steel": 2800.0
+    },
+    "IfcSlab": {
+        "default": 180.0,
+        "Concrete": 220.0,
+        "Precast": 300.0
+    },
+    "IfcWall": {
+        "default": 150.0,
+        "Brick": 120.0,
+        "Concrete": 200.0,
+        "Drywall": 80.0,
+        "glass": 450.0
+    },
+    "IfcFooting": {
+        "default": 250.0,
+        "Concrete": 300.0
+    },
+    "IfcStair": {
+        "default": 1500.0
+    },
+    "IfcWindow": {
+        "default": 500.0
+    },
+    "IfcDoor": {
+        "default": 350.0
+    }
+}
